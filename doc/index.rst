@@ -35,7 +35,7 @@ Here is an example that will set the poller_tag property with the value DMZ of a
 ::
   
   define module{
-      module_name     IpTag
+      module_name     ip-tag
       module_type     ip_tag
       ip_range        192.168.0.1/24
       property        poller_tag
@@ -50,7 +50,7 @@ To use the module add it in the arbiter object:
   
   define arbiter {
       [...]
-      modules   NSCA,IpTag
+      modules   NSCA,ip-tag
   }
 
 
@@ -65,7 +65,7 @@ Here is an example where we want to add the "dmz" template on the hosts, while a
 ::
 
   define module{
-      module_name   IpTag
+      module_name   ip-tag
       module_type   ip_tag
       ip_range      192.168.0.1/24
       property      use
