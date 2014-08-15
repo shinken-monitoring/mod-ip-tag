@@ -1,7 +1,7 @@
 {
   "name": "ip-tag",
   "types": ["module"],
-  "version": "1.4",
+  "version": "1.4.1",
   "homepage": "http://github.com/shinken-monitoring/mod-ip-tag",
   "author": "Jean Gabès",
   "description": "Tag host by their IP ranges",
