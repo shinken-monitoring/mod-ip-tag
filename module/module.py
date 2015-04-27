@@ -150,19 +150,27 @@ class Ip_Tag_Arbiter(BaseModule):
                 # set put the value even if the property exists
                 if self.method == 'append':
                     orig_v = getattr(h, self.property, '')
-                    new_v = ','.join([orig_v, self.value])
-                    setattr(h, self.property, new_v)
+                    if isinstance(orig_v, list):
+                      orig_v.append(self.value)
+                      setattr(h, self.property, h.properties[self.property].pythonize(orig_v))  
+                    else:
+                      new_v = ','.join([orig_v, self.value])
+                      setattr(h, self.property, h.properties[self.property].pythonize(new_v)) 
 
                 # Same but we put before
                 if self.method == 'prepend':
                     orig_v = getattr(h, self.property, '')
-                    new_v = ','.join([self.value, orig_v])
-                    setattr(h, self.property, new_v)
+                    if isinstance(orig_v, list):
+                      orig_v.insert(0,self.value)
+                      setattr(h, self.property, h.properties[self.property].pythonize(orig_v))
+                    else:
+                      new_v = ','.join([self.value, orig_v])
+                      setattr(h, self.property, h.properties[self.property].pythonize(new_v))
 
                 if self.method == 'replace':
                     if not hasattr(h, self.property):
                         # Ok, set the value!
-                        setattr(h, self.property, self.value)
+                        setattr(h, self.property, h.properties[self.property].pythonize(self.value))
 
                 if self.method == 'set':
-                    setattr(h, self.property, self.value)
+                    setattr(h, self.property, h.properties[self.property].pythonize(self.value))
